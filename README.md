@@ -92,11 +92,11 @@ print(result["inundation_probability"])  # 0.8427
 ```mermaid
 graph TD
     subgraph Client["Client Layer"]
-        UI[Speakeasy Dashboard / React 18]
+        UI[Dashboard / React 18]
     end
 
     subgraph Serving["Serving Plane"]
-        API[FastAPI Telemetry Gateway :8000]
+        API[FastAPI Telemetry Gateway]
         AUTH[JWT Cryptographic Service]
     end
 
