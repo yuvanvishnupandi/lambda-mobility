@@ -8,7 +8,7 @@ A distributed urban intelligence platform turning municipal transit fleets and e
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Apache Spark](https://img.shields.io/badge/Apache_Spark-MLlib-E25A1C.svg?logo=apachespark&logoColor=white)](https://spark.apache.org/)
 [![Apache Kafka](https://img.shields.io/badge/Apache_Kafka-Streaming-231F20.svg?logo=apachekafka&logoColor=white)](https://kafka.apache.org/)
-[![arXiv](https://img.shields.io/badge/arXiv-ITS%20Research-b31b1b.svg)](https://arxiv.org/)
+
 
 ---
 
