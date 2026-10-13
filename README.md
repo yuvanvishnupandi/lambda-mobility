@@ -1,6 +1,6 @@
 ## lambda-mobility
 
-An implementation of **Lambda Mobility OS** — a distributed urban transit operating system and real-time Big Data telemetry platform. Combines Apache Kafka edge streaming, Apache Spark MLlib traffic prediction, automated ANPR optical tracking, and multimodal journey planning for municipal arterial transit corridors.
+A distributed urban intelligence platform turning municipal transit fleets and edge sensor networks into real-time sensing grids. Built on top of Apache Kafka streaming and Apache Spark MLlib, the system continuously ingests arterial corridor telemetry to perform subsecond multimodal journey routing, automated optical ANPR enforcement, and predictive hydrological flood modeling across high-density urban networks.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
