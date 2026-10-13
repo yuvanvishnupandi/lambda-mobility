@@ -101,6 +101,7 @@ class KafkaTrafficStreamEngine:
                 self.broker.produce(event)
                 produced_records.append(event)
 
+        os.makedirs(os.path.dirname(KAFKA_STREAM_BUFFER), exist_ok=True)
         with open(KAFKA_STREAM_BUFFER, "w", encoding="utf-8") as f:
             json.dump(produced_records, f, indent=2)
 
