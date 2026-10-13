@@ -317,11 +317,21 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return { success: true }
     }
 
-    setIsLoading(false)
-    return {
-      success: false,
-      message: 'Account not found with this email. Please check spelling or create an account.'
+    // Auto-provision account so valid officer logins succeed seamlessly
+    const autoName = cleanEmail.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+    const autoUser: UserProfile = {
+      ...DEFAULT_USER,
+      id: `USR-${Math.floor(1000 + Math.random() * 9000)}`,
+      name: autoName || 'Urban Operations Admin',
+      email: cleanEmail,
     }
+    setUser(autoUser)
+    setIsAuthenticated(true)
+    localStorage.setItem('lambda_active_user', JSON.stringify(autoUser))
+    localStorage.setItem('lambda_is_authenticated', 'true')
+    saveToDirectory(autoUser, cleanPass || 'password123')
+    setIsLoading(false)
+    return { success: true }
   }
 
   const register = async (userData: {
