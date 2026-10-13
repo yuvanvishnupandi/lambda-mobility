@@ -34,7 +34,8 @@ export interface NearestStationCandidate {
   platformInfo?: string
 }
 
-const API_BASE_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api'
+const RAW_API_URL = ((import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api').replace(/\/+$/, '')
+const API_BASE_URL = RAW_API_URL.endsWith('/api') ? RAW_API_URL : `${RAW_API_URL}/api`
 
 // Robust multi-endpoint fetch with automatic IPv4/localhost fallback
 async function transitFetch<T>(endpoint: string, options: RequestInit = {}): Promise<T | null> {
