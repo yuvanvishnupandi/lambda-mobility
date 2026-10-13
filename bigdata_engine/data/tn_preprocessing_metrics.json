@@ -1,0 +1,30 @@
+{
+  "dataset_name": "Tamil Nadu 38-District Rainfall & Flood Risk Intelligence",
+  "geographic_coverage": "38 Districts of Tamil Nadu (Chennai, Chengalpattu, Coimbatore, Madurai, etc.)",
+  "total_records_processed": 13870,
+  "train_samples_80pct": 11096,
+  "test_samples_20pct": 2774,
+  "features_engineered": [
+    "Elevation_m",
+    "Drainage_Efficiency_Score",
+    "Is_Coastal",
+    "Rainfall_mm",
+    "Rainfall_Anomaly_Pct",
+    "Reservoir_Capacity_Pct",
+    "Soil_Saturation_Index",
+    "River_Water_Level_m",
+    "Cumulative_3Day_Rain_mm",
+    "Flash_Flood_Potential_Index"
+  ],
+  "num_features": 10,
+  "class_distribution": {
+    "CRITICAL_INUNDATION": 1648,
+    "HIGH_ALERT": 379,
+    "LOW_RISK": 11386,
+    "MODERATE_RISK": 457
+  },
+  "outliers_detected_3_sigma": 564,
+  "mean_rainfall_mm": 17.9,
+  "max_rainfall_event_mm": 235.4,
+  "output_preprocessed_file": "C:\\Users\\yuvan\\OneDrive\\Documents\\lambda\\Lambda-App\\bigdata_engine\\data\\tamil_nadu_flood_preprocessed.csv"
+}

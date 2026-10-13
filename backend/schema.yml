@@ -1,0 +1,3323 @@
+openapi: 3.0.3
+info:
+  title: Urban Intelligence Platform API
+  version: 1.0.0
+  description: AI-powered Urban Intelligence Platform turning public transport buses
+    into mobile sensing units for Ahmedabad City.
+paths:
+  /api/alerts/:
+    get:
+      operationId: alerts_list
+      parameters:
+      - in: query
+        name: is_read
+        schema:
+          type: string
+        description: Filter by read status (true/false)
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: severity
+        schema:
+          type: string
+        description: Filter by severity (CRITICAL, HIGH, MEDIUM, LOW)
+      - in: query
+        name: type
+        schema:
+          type: string
+        description: Filter by alert type
+      tags:
+      - alerts
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAlertList'
+          description: ''
+  /api/alerts/{id}/acknowledge/:
+    post:
+      operationId: alerts_acknowledge_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - alerts
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/alerts/{id}/read/:
+    patch:
+      operationId: alerts_read_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - alerts
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/analytics/detections/:
+    get:
+      operationId: analytics_detections_retrieve
+      tags:
+      - analytics
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/analytics/incidents/:
+    get:
+      operationId: analytics_incidents_retrieve
+      tags:
+      - analytics
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/analytics/insights/:
+    get:
+      operationId: analytics_insights_retrieve
+      tags:
+      - analytics
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/analytics/road-conditions/:
+    get:
+      operationId: analytics_road_conditions_retrieve
+      tags:
+      - analytics
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/analytics/route-delays/:
+    get:
+      operationId: analytics_route_delays_retrieve
+      tags:
+      - analytics
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/analytics/traffic/:
+    get:
+      operationId: analytics_traffic_retrieve
+      tags:
+      - analytics
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/auth/login/:
+    post:
+      operationId: auth_login_create
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+          description: ''
+  /api/auth/logout/:
+    post:
+      operationId: auth_logout_create
+      tags:
+      - auth
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/auth/me/:
+    get:
+      operationId: auth_me_retrieve
+      tags:
+      - auth
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/auth/refresh/:
+    post:
+      operationId: auth_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefreshRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/dashboard/demo/start/:
+    post:
+      operationId: dashboard_demo_start_create
+      tags:
+      - dashboard
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/dashboard/demo/status/:
+    get:
+      operationId: dashboard_demo_status_retrieve
+      tags:
+      - dashboard
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/dashboard/demo/stop/:
+    post:
+      operationId: dashboard_demo_stop_create
+      tags:
+      - dashboard
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/dashboard/live-alerts/:
+    get:
+      operationId: dashboard_live_alerts_retrieve
+      tags:
+      - dashboard
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/dashboard/summary/:
+    get:
+      operationId: dashboard_summary_retrieve
+      tags:
+      - dashboard
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/demo/start/:
+    post:
+      operationId: demo_start_create
+      tags:
+      - demo
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/demo/status/:
+    get:
+      operationId: demo_status_retrieve
+      tags:
+      - demo
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/demo/stop/:
+    post:
+      operationId: demo_stop_create
+      tags:
+      - demo
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/detections/:
+    get:
+      operationId: detections_list
+      parameters:
+      - in: query
+        name: bus
+        schema:
+          type: string
+        description: Filter by bus ID (e.g. BUS-104)
+      - in: query
+        name: confidence
+        schema:
+          type: string
+        description: Minimum confidence (0.0 to 1.0)
+      - in: query
+        name: date
+        schema:
+          type: string
+        description: Filter by date YYYY-MM-DD
+      - in: query
+        name: detection_type
+        schema:
+          type: string
+        description: Filter by detection type (e.g. POTHOLE, WATERLOGGING)
+      - in: query
+        name: location
+        schema:
+          type: string
+        description: Search by location name
+      - in: query
+        name: severity
+        schema:
+          type: string
+        description: Filter by severity (LOW, MEDIUM, HIGH, CRITICAL)
+      - in: query
+        name: status
+        schema:
+          type: string
+        description: Filter by status
+      tags:
+      - detections
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Detection'
+          description: ''
+    post:
+      operationId: detections_create
+      tags:
+      - detections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectionCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DetectionCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DetectionCreateRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Detection'
+          description: ''
+  /api/detections/{id}/:
+    get:
+      operationId: detections_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - detections
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Detection'
+          description: ''
+  /api/edge/detections/:
+    post:
+      operationId: edge_detections_create
+      tags:
+      - edge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectionCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DetectionCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DetectionCreateRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/edge/heartbeat/:
+    post:
+      operationId: edge_heartbeat_create
+      tags:
+      - edge
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/edge/incidents/:
+    post:
+      operationId: edge_incidents_create
+      tags:
+      - edge
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/edge/location/:
+    post:
+      operationId: edge_location_create
+      tags:
+      - edge
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /api/fleet/buses/:
+    get:
+      operationId: fleet_buses_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: route
+        schema:
+          type: string
+        description: Filter by route number (e.g. 18)
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Search by bus ID or registration number
+      - in: query
+        name: status
+        schema:
+          type: string
+        description: Filter by status (ONLINE, OFFLINE, PROCESSING, MAINTENANCE)
+      tags:
+      - fleet
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBusList'
+          description: ''
+    post:
+      operationId: fleet_buses_create
+      tags:
+      - fleet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BusRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BusRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
+          description: ''
+  /api/fleet/buses/{id}/:
+    get:
+      operationId: fleet_buses_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - fleet
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
+          description: ''
+    put:
+      operationId: fleet_buses_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - fleet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BusRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BusRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
+          description: ''
+    patch:
+      operationId: fleet_buses_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - fleet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBusRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBusRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBusRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
+          description: ''
+    delete:
+      operationId: fleet_buses_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - fleet
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/fleet/buses/{id}/cameras/:
+    get:
+      operationId: fleet_buses_cameras_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - fleet
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBusCameraList'
+          description: ''
+  /api/fleet/buses/{id}/location/:
+    post:
+      operationId: fleet_buses_location_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - fleet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LocationUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LocationUpdateRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
+          description: ''
+  /api/fleet/buses/{id}/location-history/:
+    get:
+      operationId: fleet_buses_location_history_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - fleet
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBusLocationHistoryList'
+          description: ''
+  /api/fleet/routes/:
+    get:
+      operationId: fleet_routes_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - fleet
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBusRouteList'
+          description: ''
+    post:
+      operationId: fleet_routes_create
+      tags:
+      - fleet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusRouteRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BusRouteRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BusRouteRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusRoute'
+          description: ''
+  /api/incidents/:
+    get:
+      operationId: incidents_list
+      parameters:
+      - in: query
+        name: bus
+        schema:
+          type: string
+        description: Filter by bus ID
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: severity
+        schema:
+          type: string
+        description: Filter by severity (CRITICAL, HIGH, MEDIUM, LOW)
+      - in: query
+        name: status
+        schema:
+          type: string
+        description: Filter by status (OPEN, INVESTIGATING, ASSIGNED, RESOLVED)
+      - in: query
+        name: type
+        schema:
+          type: string
+        description: Filter by type (HIT_AND_RUN, RASH_DRIVING, ACCIDENT, etc.)
+      tags:
+      - incidents
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedIncidentList'
+          description: ''
+    post:
+      operationId: incidents_create
+      tags:
+      - incidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IncidentCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IncidentCreateRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentCreate'
+          description: ''
+  /api/incidents/{id}/:
+    get:
+      operationId: incidents_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - incidents
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentDetail'
+          description: ''
+    put:
+      operationId: incidents_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - incidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IncidentDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IncidentDetailRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentDetail'
+          description: ''
+    patch:
+      operationId: incidents_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - incidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedIncidentDetailRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedIncidentDetailRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedIncidentDetailRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentDetail'
+          description: ''
+  /api/incidents/{id}/resolve/:
+    post:
+      operationId: incidents_resolve_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - incidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentResolveRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IncidentResolveRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IncidentResolveRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentDetail'
+          description: ''
+  /api/map/all/:
+    get:
+      operationId: map_all_retrieve
+      tags:
+      - map
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/map/buses/:
+    get:
+      operationId: map_buses_retrieve
+      tags:
+      - map
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/map/detections/:
+    get:
+      operationId: map_detections_retrieve
+      tags:
+      - map
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/map/hazards/:
+    get:
+      operationId: map_hazards_retrieve
+      tags:
+      - map
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/map/incidents/:
+    get:
+      operationId: map_incidents_retrieve
+      tags:
+      - map
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/map/traffic/:
+    get:
+      operationId: map_traffic_retrieve
+      tags:
+      - map
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/reports/:
+    get:
+      operationId: reports_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - reports
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDailyReportList'
+          description: ''
+  /api/reports/{id}/:
+    get:
+      operationId: reports_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - reports
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyReport'
+          description: ''
+  /api/reports/generate/:
+    post:
+      operationId: reports_generate_create
+      tags:
+      - reports
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/roads/hazards/:
+    get:
+      operationId: roads_hazards_list
+      parameters:
+      - in: query
+        name: hazard_type
+        schema:
+          type: string
+        description: Filter by hazard type (e.g. POTHOLE)
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: road
+        schema:
+          type: string
+        description: Search road name
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: severity
+        schema:
+          type: string
+        description: Filter by severity (LOW, MEDIUM, HIGH, CRITICAL)
+      - in: query
+        name: status
+        schema:
+          type: string
+        description: Filter by status
+      tags:
+      - roads
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRoadHazardList'
+          description: ''
+  /api/roads/hazards/{id}/:
+    get:
+      operationId: roads_hazards_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - roads
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadHazard'
+          description: ''
+    put:
+      operationId: roads_hazards_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - roads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoadHazardRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RoadHazardRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RoadHazardRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadHazard'
+          description: ''
+    patch:
+      operationId: roads_hazards_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - roads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRoadHazardRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRoadHazardRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRoadHazardRequest'
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadHazard'
+          description: ''
+  /api/roads/maintenance-priority/:
+    get:
+      operationId: roads_maintenance_priority_retrieve
+      tags:
+      - roads
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/roads/summary/:
+    get:
+      operationId: roads_summary_retrieve
+      tags:
+      - roads
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadSummary'
+          description: ''
+  /api/safety/school-zones/:
+    get:
+      operationId: safety_school_zones_retrieve
+      tags:
+      - safety
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/traffic/congestion/:
+    get:
+      operationId: traffic_congestion_retrieve
+      tags:
+      - traffic
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/traffic/current/:
+    get:
+      operationId: traffic_current_retrieve
+      tags:
+      - traffic
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/traffic/history/:
+    get:
+      operationId: traffic_history_retrieve
+      tags:
+      - traffic
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/traffic/summary/:
+    get:
+      operationId: traffic_summary_retrieve
+      tags:
+      - traffic
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/traffic/vehicle-classification/:
+    get:
+      operationId: traffic_vehicle_classification_retrieve
+      tags:
+      - traffic
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/vehicles/:
+    get:
+      operationId: vehicles_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - vehicles
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTrackedVehicleList'
+          description: ''
+  /api/vehicles/{id}/:
+    get:
+      operationId: vehicles_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - vehicles
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackedVehicle'
+          description: ''
+  /api/vehicles/{id}/detections/:
+    get:
+      operationId: vehicles_detections_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - vehicles
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVehicleDetectionList'
+          description: ''
+  /api/vehicles/{id}/route/:
+    get:
+      operationId: vehicles_route_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - vehicles
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/vehicles/search/:
+    get:
+      operationId: vehicles_search_retrieve
+      parameters:
+      - in: query
+        name: registration
+        schema:
+          type: string
+        description: Vehicle registration number e.g. GJ01XX4821
+      tags:
+      - vehicles
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+components:
+  schemas:
+    Alert:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        alert_type:
+          type: string
+          maxLength: 50
+        type:
+          type: string
+          readOnly: true
+        severity:
+          $ref: '#/components/schemas/AlertSeverityEnum'
+        title:
+          type: string
+          maxLength: 255
+        message:
+          type: string
+        location:
+          type: string
+          maxLength: 255
+        bus:
+          type: integer
+          nullable: true
+        busId:
+          type: string
+          readOnly: true
+          default: ''
+        bus_id:
+          type: string
+          readOnly: true
+          default: ''
+        incident:
+          type: integer
+          nullable: true
+        incident_id:
+          type: string
+          readOnly: true
+        confidence:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        gps:
+          type: string
+          readOnly: true
+        timestamp:
+          type: string
+          readOnly: true
+        is_read:
+          type: boolean
+        acknowledged:
+          type: boolean
+        acknowledged_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - alert_type
+      - busId
+      - bus_id
+      - gps
+      - id
+      - incident_id
+      - location
+      - message
+      - timestamp
+      - title
+      - type
+    AlertSeverityEnum:
+      enum:
+      - INFO
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+      type: string
+      description: |-
+        * `INFO` - Informational
+        * `LOW` - Low Priority
+        * `MEDIUM` - Medium Priority
+        * `HIGH` - High Priority
+        * `CRITICAL` - Critical Alert
+    Bus:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        bus_id:
+          type: string
+          maxLength: 50
+        registration_number:
+          type: string
+          maxLength: 50
+        route:
+          type: integer
+          nullable: true
+        route_name:
+          type: string
+          readOnly: true
+          default: ''
+        route_number:
+          type: string
+          readOnly: true
+          default: ''
+        status:
+          $ref: '#/components/schemas/BusStatusEnum'
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        gps:
+          type: string
+          readOnly: true
+        speed:
+          type: number
+          format: double
+        heading:
+          type: number
+          format: double
+        last_seen:
+          type: string
+          format: date-time
+        ai_status:
+          type: string
+          maxLength: 50
+        aiStatus:
+          type: string
+        current_location_name:
+          type: string
+          maxLength: 255
+        location:
+          type: string
+        cameras:
+          type: string
+          readOnly: true
+        lastUpdate:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - bus_id
+      - cameras
+      - created_at
+      - gps
+      - id
+      - lastUpdate
+      - registration_number
+      - route_name
+      - route_number
+      - updated_at
+    BusCamera:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        camera_id:
+          type: string
+          maxLength: 100
+        camera_type:
+          $ref: '#/components/schemas/CameraTypeEnum'
+        status:
+          $ref: '#/components/schemas/BusCameraStatusEnum'
+        last_frame:
+          type: string
+          nullable: true
+          maxLength: 500
+        resolution:
+          type: string
+          maxLength: 50
+        fps:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        last_seen:
+          type: string
+          format: date-time
+      required:
+      - camera_id
+      - id
+    BusCameraStatusEnum:
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - ERROR
+      type: string
+      description: |-
+        * `ACTIVE` - Active
+        * `INACTIVE` - Inactive
+        * `ERROR` - Error
+    BusLocationHistory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        bus:
+          type: integer
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        gps:
+          type: string
+          readOnly: true
+        speed:
+          type: number
+          format: double
+        heading:
+          type: number
+          format: double
+        timestamp:
+          type: string
+          format: date-time
+      required:
+      - bus
+      - gps
+      - id
+      - latitude
+      - longitude
+    BusRequest:
+      type: object
+      properties:
+        bus_id:
+          type: string
+          minLength: 1
+          maxLength: 50
+        registration_number:
+          type: string
+          minLength: 1
+          maxLength: 50
+        route:
+          type: integer
+          nullable: true
+        status:
+          $ref: '#/components/schemas/BusStatusEnum'
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        speed:
+          type: number
+          format: double
+        heading:
+          type: number
+          format: double
+        last_seen:
+          type: string
+          format: date-time
+        ai_status:
+          type: string
+          minLength: 1
+          maxLength: 50
+        aiStatus:
+          type: string
+          minLength: 1
+        current_location_name:
+          type: string
+          maxLength: 255
+        location:
+          type: string
+          minLength: 1
+      required:
+      - bus_id
+      - registration_number
+    BusRoute:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        route_number:
+          type: string
+          maxLength: 50
+        route_name:
+          type: string
+          maxLength: 255
+        start_location:
+          type: string
+          maxLength: 255
+        end_location:
+          type: string
+          maxLength: 255
+        status:
+          $ref: '#/components/schemas/BusRouteStatusEnum'
+        waypoints: {}
+        bus_count:
+          type: integer
+          readOnly: true
+      required:
+      - bus_count
+      - end_location
+      - id
+      - route_name
+      - route_number
+      - start_location
+    BusRouteRequest:
+      type: object
+      properties:
+        route_number:
+          type: string
+          minLength: 1
+          maxLength: 50
+        route_name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        start_location:
+          type: string
+          minLength: 1
+          maxLength: 255
+        end_location:
+          type: string
+          minLength: 1
+          maxLength: 255
+        status:
+          $ref: '#/components/schemas/BusRouteStatusEnum'
+        waypoints: {}
+      required:
+      - end_location
+      - route_name
+      - route_number
+      - start_location
+    BusRouteStatusEnum:
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - DIVERTED
+      type: string
+      description: |-
+        * `ACTIVE` - Active
+        * `INACTIVE` - Inactive
+        * `DIVERTED` - Diverted
+    BusStatusEnum:
+      enum:
+      - ONLINE
+      - OFFLINE
+      - PROCESSING
+      - MAINTENANCE
+      type: string
+      description: |-
+        * `ONLINE` - Online
+        * `OFFLINE` - Offline
+        * `PROCESSING` - Processing
+        * `MAINTENANCE` - Maintenance
+    CameraTypeEnum:
+      enum:
+      - FRONT
+      - REAR
+      - LEFT
+      - RIGHT
+      - PASSENGER
+      type: string
+      description: |-
+        * `FRONT` - Front Road Sensing
+        * `REAR` - Rear Traffic Sensing
+        * `LEFT` - Left Pavement/Lane
+        * `RIGHT` - Right Traffic/Lane
+        * `PASSENGER` - Passenger Cabin
+    DailyReport:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        report_date:
+          type: string
+          format: date
+        total_buses:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        total_detections:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        road_hazards:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        traffic_events:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        incidents:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        critical_incidents:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        average_confidence:
+          type: number
+          format: double
+        summary_text:
+          type: string
+          nullable: true
+        report_data: {}
+        generated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - report_date
+    Detection:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        detection_id:
+          type: string
+          maxLength: 100
+        bus:
+          type: integer
+        bus_id:
+          type: string
+          readOnly: true
+        busId:
+          type: string
+          readOnly: true
+        detection_type:
+          $ref: '#/components/schemas/DetectionTypeEnum'
+        type:
+          type: string
+          readOnly: true
+        confidence:
+          type: number
+          format: double
+          description: Confidence between 0.0 and 1.0
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        gps:
+          type: string
+          readOnly: true
+        location:
+          type: string
+          readOnly: true
+        location_name:
+          type: string
+          maxLength: 255
+        timestamp:
+          type: string
+          format: date-time
+        frame_reference:
+          type: string
+          nullable: true
+          maxLength: 500
+        status:
+          $ref: '#/components/schemas/DetectionStatusEnum'
+        metadata: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - bus
+      - busId
+      - bus_id
+      - confidence
+      - created_at
+      - detection_id
+      - detection_type
+      - gps
+      - id
+      - latitude
+      - location
+      - longitude
+      - type
+    DetectionCreateRequest:
+      type: object
+      properties:
+        bus_id:
+          type: string
+          minLength: 1
+        detection_type:
+          $ref: '#/components/schemas/DetectionTypeEnum'
+        confidence:
+          type: number
+          format: double
+          maximum: 1.0
+          minimum: 0.0
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        timestamp:
+          type: string
+          format: date-time
+        frame_reference:
+          type: string
+          default: ''
+        metadata:
+          type: object
+          additionalProperties: {}
+      required:
+      - bus_id
+      - confidence
+      - detection_type
+      - latitude
+      - longitude
+    DetectionStatusEnum:
+      enum:
+      - NEW
+      - VERIFIED
+      - DISMISSED
+      - PROCESSED
+      type: string
+      description: |-
+        * `NEW` - New
+        * `VERIFIED` - Verified
+        * `DISMISSED` - Dismissed
+        * `PROCESSED` - Processed into Hazard/Incident
+    DetectionTypeEnum:
+      enum:
+      - POTHOLE
+      - ROAD_DAMAGE
+      - WATERLOGGING
+      - MISSING_DIVIDER
+      - MISSING_ZEBRA_CROSSING
+      - TRAFFIC_SIGN
+      - VEHICLE
+      - PEDESTRIAN
+      - SCHOOL_CHILD
+      - RASH_DRIVING
+      - HIT_AND_RUN
+      type: string
+      description: |-
+        * `POTHOLE` - Pothole
+        * `ROAD_DAMAGE` - Road Damage
+        * `WATERLOGGING` - Waterlogging
+        * `MISSING_DIVIDER` - Missing Divider
+        * `MISSING_ZEBRA_CROSSING` - Missing Zebra Crossing
+        * `TRAFFIC_SIGN` - Traffic Sign Issue
+        * `VEHICLE` - Vehicle
+        * `PEDESTRIAN` - Pedestrian
+        * `SCHOOL_CHILD` - School Child Risk
+        * `RASH_DRIVING` - Rash Driving
+        * `HIT_AND_RUN` - Hit and Run
+    HazardTypeEnum:
+      enum:
+      - POTHOLE
+      - ROAD_DAMAGE
+      - WATERLOGGING
+      - MISSING_DIVIDER
+      - MISSING_ZEBRA_CROSSING
+      - UNMARKED_SPEEDBUMP
+      type: string
+      description: |-
+        * `POTHOLE` - Pothole
+        * `ROAD_DAMAGE` - Road Surface Damage
+        * `WATERLOGGING` - Waterlogging
+        * `MISSING_DIVIDER` - Missing Lane Divider
+        * `MISSING_ZEBRA_CROSSING` - Missing Zebra Crossing
+        * `UNMARKED_SPEEDBUMP` - Unmarked Speed Bump
+    Incident:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        incident_id:
+          type: string
+          maxLength: 50
+        incident_type:
+          $ref: '#/components/schemas/IncidentTypeEnum'
+        type:
+          type: string
+          readOnly: true
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        bus:
+          type: integer
+          nullable: true
+        busId:
+          type: string
+          readOnly: true
+          default: ''
+        location:
+          type: string
+          maxLength: 255
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        gps:
+          type: string
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+        time:
+          type: string
+          readOnly: true
+        confidence:
+          type: number
+          format: double
+        status:
+          $ref: '#/components/schemas/Status80fEnum'
+        description:
+          type: string
+          nullable: true
+        assigned_to:
+          type: integer
+          nullable: true
+        assigned_team:
+          type: string
+          maxLength: 150
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+        vehicleInfo:
+          readOnly: true
+        vehicle_info: {}
+        evidence_frame:
+          type: string
+          nullable: true
+          maxLength: 500
+        timeline: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - busId
+      - created_at
+      - gps
+      - id
+      - incident_id
+      - incident_type
+      - latitude
+      - location
+      - longitude
+      - time
+      - type
+      - updated_at
+      - vehicleInfo
+    IncidentCreate:
+      type: object
+      properties:
+        incident_type:
+          $ref: '#/components/schemas/IncidentTypeEnum'
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        location:
+          type: string
+          maxLength: 255
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        confidence:
+          type: number
+          format: double
+        description:
+          type: string
+          nullable: true
+        vehicle_info: {}
+        evidence_frame:
+          type: string
+          nullable: true
+          maxLength: 500
+      required:
+      - incident_type
+      - latitude
+      - location
+      - longitude
+    IncidentCreateRequest:
+      type: object
+      properties:
+        incident_type:
+          $ref: '#/components/schemas/IncidentTypeEnum'
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        bus_id:
+          type: string
+          writeOnly: true
+          minLength: 1
+        location:
+          type: string
+          minLength: 1
+          maxLength: 255
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        confidence:
+          type: number
+          format: double
+        description:
+          type: string
+          nullable: true
+        vehicle_info: {}
+        evidence_frame:
+          type: string
+          nullable: true
+          maxLength: 500
+      required:
+      - incident_type
+      - latitude
+      - location
+      - longitude
+    IncidentDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        incident_id:
+          type: string
+          maxLength: 50
+        incident_type:
+          $ref: '#/components/schemas/IncidentTypeEnum'
+        type:
+          type: string
+          readOnly: true
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        bus:
+          type: integer
+          nullable: true
+        busId:
+          type: string
+          readOnly: true
+          default: ''
+        location:
+          type: string
+          maxLength: 255
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        gps:
+          type: string
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+        time:
+          type: string
+          readOnly: true
+        confidence:
+          type: number
+          format: double
+        status:
+          $ref: '#/components/schemas/Status80fEnum'
+        description:
+          type: string
+          nullable: true
+        assigned_to:
+          type: integer
+          nullable: true
+        assigned_team:
+          type: string
+          maxLength: 150
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+        vehicleInfo:
+          readOnly: true
+        vehicle_info: {}
+        evidence_frame:
+          type: string
+          nullable: true
+          maxLength: 500
+        timeline: {}
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        bus_details:
+          allOf:
+          - $ref: '#/components/schemas/Bus'
+          readOnly: true
+        resolution_notes:
+          type: string
+          nullable: true
+      required:
+      - busId
+      - bus_details
+      - created_at
+      - gps
+      - id
+      - incident_id
+      - incident_type
+      - latitude
+      - location
+      - longitude
+      - time
+      - type
+      - updated_at
+      - vehicleInfo
+    IncidentDetailRequest:
+      type: object
+      properties:
+        incident_id:
+          type: string
+          minLength: 1
+          maxLength: 50
+        incident_type:
+          $ref: '#/components/schemas/IncidentTypeEnum'
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        bus:
+          type: integer
+          nullable: true
+        location:
+          type: string
+          minLength: 1
+          maxLength: 255
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        timestamp:
+          type: string
+          format: date-time
+        confidence:
+          type: number
+          format: double
+        status:
+          $ref: '#/components/schemas/Status80fEnum'
+        description:
+          type: string
+          nullable: true
+        assigned_to:
+          type: integer
+          nullable: true
+        assigned_team:
+          type: string
+          minLength: 1
+          maxLength: 150
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+        vehicle_info: {}
+        evidence_frame:
+          type: string
+          nullable: true
+          maxLength: 500
+        timeline: {}
+        resolution_notes:
+          type: string
+          nullable: true
+      required:
+      - incident_id
+      - incident_type
+      - latitude
+      - location
+      - longitude
+    IncidentResolveRequest:
+      type: object
+      properties:
+        resolution_notes:
+          type: string
+          default: Incident resolved by operator.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/IncidentResolveStatusEnum'
+          default: RESOLVED
+    IncidentResolveStatusEnum:
+      enum:
+      - RESOLVED
+      - DISMISSED
+      type: string
+      description: |-
+        * `RESOLVED` - RESOLVED
+        * `DISMISSED` - DISMISSED
+    IncidentTypeEnum:
+      enum:
+      - HIT_AND_RUN
+      - RASH_DRIVING
+      - PEDESTRIAN_RISK
+      - ACCIDENT
+      - ROAD_HAZARD
+      - WATERLOGGING
+      - OTHER
+      type: string
+      description: |-
+        * `HIT_AND_RUN` - Hit and Run
+        * `RASH_DRIVING` - Rash Driving
+        * `PEDESTRIAN_RISK` - Pedestrian Risk
+        * `ACCIDENT` - Traffic Accident
+        * `ROAD_HAZARD` - Critical Road Hazard
+        * `WATERLOGGING` - Severe Waterlogging
+        * `OTHER` - Other Urban Safety Incident
+    LocationUpdateRequest:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        speed:
+          type: number
+          format: double
+          default: 0.0
+        heading:
+          type: number
+          format: double
+          default: 0.0
+        location_name:
+          type: string
+          default: ''
+      required:
+      - latitude
+      - longitude
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 1
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+      required:
+      - password
+      - username
+    PaginatedAlertList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alert'
+    PaginatedBusCameraList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusCamera'
+    PaginatedBusList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bus'
+    PaginatedBusLocationHistoryList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusLocationHistory'
+    PaginatedBusRouteList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusRoute'
+    PaginatedDailyReportList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyReport'
+    PaginatedIncidentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Incident'
+    PaginatedRoadHazardList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoadHazard'
+    PaginatedTrackedVehicleList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackedVehicle'
+    PaginatedVehicleDetectionList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleDetection'
+    PatchedBusRequest:
+      type: object
+      properties:
+        bus_id:
+          type: string
+          minLength: 1
+          maxLength: 50
+        registration_number:
+          type: string
+          minLength: 1
+          maxLength: 50
+        route:
+          type: integer
+          nullable: true
+        status:
+          $ref: '#/components/schemas/BusStatusEnum'
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        speed:
+          type: number
+          format: double
+        heading:
+          type: number
+          format: double
+        last_seen:
+          type: string
+          format: date-time
+        ai_status:
+          type: string
+          minLength: 1
+          maxLength: 50
+        aiStatus:
+          type: string
+          minLength: 1
+        current_location_name:
+          type: string
+          maxLength: 255
+        location:
+          type: string
+          minLength: 1
+    PatchedIncidentDetailRequest:
+      type: object
+      properties:
+        incident_id:
+          type: string
+          minLength: 1
+          maxLength: 50
+        incident_type:
+          $ref: '#/components/schemas/IncidentTypeEnum'
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        bus:
+          type: integer
+          nullable: true
+        location:
+          type: string
+          minLength: 1
+          maxLength: 255
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        timestamp:
+          type: string
+          format: date-time
+        confidence:
+          type: number
+          format: double
+        status:
+          $ref: '#/components/schemas/Status80fEnum'
+        description:
+          type: string
+          nullable: true
+        assigned_to:
+          type: integer
+          nullable: true
+        assigned_team:
+          type: string
+          minLength: 1
+          maxLength: 150
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+        vehicle_info: {}
+        evidence_frame:
+          type: string
+          nullable: true
+          maxLength: 500
+        timeline: {}
+        resolution_notes:
+          type: string
+          nullable: true
+    PatchedRoadHazardRequest:
+      type: object
+      properties:
+        road_name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        hazard_type:
+          $ref: '#/components/schemas/HazardTypeEnum'
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        confidence:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        detected_by_bus:
+          type: integer
+          nullable: true
+        first_detected:
+          type: string
+          format: date-time
+        last_detected:
+          type: string
+          format: date-time
+        occurrence_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        status:
+          $ref: '#/components/schemas/RoadHazardStatusEnum'
+        maintenance_priority:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Priority score 1-100
+        description:
+          type: string
+          nullable: true
+    RoadHazard:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        road_name:
+          type: string
+          maxLength: 255
+        hazard_type:
+          $ref: '#/components/schemas/HazardTypeEnum'
+        type:
+          type: string
+          readOnly: true
+        location:
+          type: string
+          readOnly: true
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        confidence:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        gps:
+          type: string
+          readOnly: true
+        detected_by_bus:
+          type: integer
+          nullable: true
+        busId:
+          type: string
+          readOnly: true
+          default: BUS-104
+        first_detected:
+          type: string
+          format: date-time
+        last_detected:
+          type: string
+          format: date-time
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+        occurrence_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        status:
+          $ref: '#/components/schemas/RoadHazardStatusEnum'
+        maintenance_priority:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Priority score 1-100
+        description:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - busId
+      - created_at
+      - gps
+      - hazard_type
+      - id
+      - latitude
+      - location
+      - longitude
+      - road_name
+      - timestamp
+      - type
+      - updated_at
+    RoadHazardRequest:
+      type: object
+      properties:
+        road_name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        hazard_type:
+          $ref: '#/components/schemas/HazardTypeEnum'
+        severity:
+          $ref: '#/components/schemas/Severity1b7Enum'
+        confidence:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        detected_by_bus:
+          type: integer
+          nullable: true
+        first_detected:
+          type: string
+          format: date-time
+        last_detected:
+          type: string
+          format: date-time
+        occurrence_count:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+        status:
+          $ref: '#/components/schemas/RoadHazardStatusEnum'
+        maintenance_priority:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Priority score 1-100
+        description:
+          type: string
+          nullable: true
+      required:
+      - hazard_type
+      - latitude
+      - longitude
+      - road_name
+    RoadHazardStatusEnum:
+      enum:
+      - PENDING
+      - VERIFIED
+      - IN_PROGRESS
+      - RESOLVED
+      type: string
+      description: |-
+        * `PENDING` - Pending Inspection
+        * `VERIFIED` - Verified
+        * `IN_PROGRESS` - Repair In Progress
+        * `RESOLVED` - Resolved
+    RoadSummary:
+      type: object
+      properties:
+        roads_scanned:
+          type: integer
+        hazards_detected:
+          type: integer
+        critical_segments:
+          type: integer
+        maintenance_priority:
+          type: integer
+      required:
+      - critical_segments
+      - hazards_detected
+      - maintenance_priority
+      - roads_scanned
+    RoleEnum:
+      enum:
+      - ADMIN
+      - OPERATOR
+      - ANALYST
+      - VIEWER
+      type: string
+      description: |-
+        * `ADMIN` - Administrator
+        * `OPERATOR` - Fleet Operator
+        * `ANALYST` - Data Analyst
+        * `VIEWER` - Viewer
+    Severity1b7Enum:
+      enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+      type: string
+      description: |-
+        * `LOW` - Low
+        * `MEDIUM` - Medium
+        * `HIGH` - High
+        * `CRITICAL` - Critical
+    Status80fEnum:
+      enum:
+      - OPEN
+      - INVESTIGATING
+      - ASSIGNED
+      - RESOLVED
+      - DISMISSED
+      type: string
+      description: |-
+        * `OPEN` - Open
+        * `INVESTIGATING` - Investigating
+        * `ASSIGNED` - Assigned
+        * `RESOLVED` - Resolved
+        * `DISMISSED` - Dismissed
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+      - access
+      - refresh
+    TokenRefreshRequest:
+      type: object
+      properties:
+        refresh:
+          type: string
+          minLength: 1
+      required:
+      - refresh
+    TokenResponse:
+      type: object
+      properties:
+        access:
+          type: string
+        refresh:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+      - access
+      - refresh
+      - user
+    TrackedVehicle:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        registration_number:
+          type: string
+          maxLength: 50
+        vehicle_type:
+          type: string
+          maxLength: 50
+        vehicle_color:
+          type: string
+          maxLength: 50
+        confidence:
+          type: number
+          format: double
+        first_seen:
+          type: string
+          format: date-time
+        last_seen:
+          type: string
+          format: date-time
+        flagged_for_incident:
+          type: boolean
+        detections_count:
+          type: integer
+          readOnly: true
+        latest_detection:
+          type: string
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created_at
+      - detections_count
+      - id
+      - latest_detection
+      - registration_number
+      - updated_at
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          title: Email address
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 254
+          - type: string
+            maxLength: 0
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        phone:
+          type: string
+          nullable: true
+          maxLength: 20
+        department:
+          type: string
+          nullable: true
+          maxLength: 100
+        badge_number:
+          type: string
+          nullable: true
+          maxLength: 50
+        is_active:
+          type: boolean
+        date_joined:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - date_joined
+      - id
+      - username
+    VehicleDetection:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        vehicle:
+          type: integer
+        bus:
+          type: integer
+          nullable: true
+        bus_id:
+          type: string
+          readOnly: true
+          default: ''
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        gps:
+          type: string
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+        direction:
+          type: string
+          maxLength: 50
+        speed_estimate:
+          type: number
+          format: double
+        confidence:
+          type: number
+          format: double
+        frame_reference:
+          type: string
+          nullable: true
+          maxLength: 500
+        location_name:
+          type: string
+          maxLength: 255
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - bus_id
+      - created_at
+      - gps
+      - id
+      - latitude
+      - longitude
+      - vehicle
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,140 @@
+{
+  "users": [
+    {
+      "id": "USR-1001",
+      "name": "Urban Officer",
+      "email": "officer@lambda.tn.gov.in",
+      "password": "Admin@2026",
+      "account_type": "ADMIN",
+      "role": "Chief Urban Intelligence Officer",
+      "department": "Smart Mobility & Municipal Operations",
+      "phone": "+91 98400 12345",
+      "city": "Chennai",
+      "district": "Chengalpattu",
+      "corridor": "GST Road Arterial Corridor (NH 45)",
+      "home_hub": "Tambaram Central Interchange",
+      "work_hub": "Cybervale Technology Hub",
+      "preferred_transit": [
+        "Suburban Rail",
+        "MTC Express",
+        "Metro Feeder"
+      ],
+      "alert_level": "CRITICAL_AND_HIGH",
+      "theme_mode": "system",
+      "created_at": "2026-01-15T09:00:00Z"
+    },
+    {
+      "id": "USR-1002",
+      "name": "Priya Ramanathan",
+      "email": "priya.traffic@gov.in",
+      "password": "Operator@2026",
+      "account_type": "ADMIN",
+      "role": "Traffic Operations Controller",
+      "department": "Metropolitan Traffic Police Command",
+      "phone": "+91 98411 67890",
+      "city": "Chennai",
+      "district": "Chennai Central",
+      "corridor": "Anna Salai - Mount Road Corridor",
+      "home_hub": "Guindy Multi-Modal Terminal",
+      "work_hub": "Central Police Headquarters",
+      "preferred_transit": [
+        "Metro",
+        "Rapid Transit"
+      ],
+      "alert_level": "ALL_ALERTS",
+      "theme_mode": "dark",
+      "created_at": "2026-02-01T10:30:00Z"
+    },
+    {
+      "id": "USR-1003",
+      "name": "Karthik Subramanian",
+      "email": "karthik.bde@lambda.io",
+      "password": "Engineer@2026",
+      "account_type": "ADMIN",
+      "role": "Principal Big Data Systems Architect",
+      "department": "Infrastructure & Distributed Analytics",
+      "phone": "+91 97900 45678",
+      "city": "Coimbatore",
+      "district": "Coimbatore Metro",
+      "corridor": "Avinashi Road Smart Highway",
+      "home_hub": "Gandhipuram Central Hub",
+      "work_hub": "TIDEL Park Tech Hub",
+      "preferred_transit": [
+        "BRTS",
+        "Express Bus"
+      ],
+      "alert_level": "ANOMALY_ALERTS",
+      "theme_mode": "dark",
+      "created_at": "2026-02-15T14:15:00Z"
+    },
+    {
+      "id": "USR-1004",
+      "name": "Ananya Sundaram",
+      "email": "ananya@gmail.com",
+      "password": "User@2026",
+      "account_type": "USER",
+      "role": "Daily Transit Commuter",
+      "department": "Public Transit Network",
+      "phone": "+91 98422 11223",
+      "city": "Chennai",
+      "district": "Chengalpattu",
+      "corridor": "GST Road Corridor (NH 45)",
+      "home_hub": "Guduvanchery Junction",
+      "work_hub": "Maraimalai Nagar Industrial Hub",
+      "preferred_transit": [
+        "MTC Express",
+        "Suburban Rail"
+      ],
+      "alert_level": "ROUTE_DELAYS",
+      "theme_mode": "system",
+      "created_at": "2026-03-01T08:00:00Z"
+    }
+  ],
+  "available_locations": [
+    {
+      "id": "LOC-CGL",
+      "city": "Chennai / Chengalpattu",
+      "district": "Chengalpattu",
+      "corridor": "GST Road Corridor (NH 45)",
+      "active_vehicles": 248,
+      "congestion_level": "Normal",
+      "weather": "29\u00b0C \u00b7 Clear"
+    },
+    {
+      "id": "LOC-CHN",
+      "city": "Chennai Central",
+      "district": "Chennai Metropolitan",
+      "corridor": "Anna Salai & OMR IT Express",
+      "active_vehicles": 412,
+      "congestion_level": "Moderate",
+      "weather": "31\u00b0C \u00b7 Humid"
+    },
+    {
+      "id": "LOC-CBE",
+      "city": "Coimbatore",
+      "district": "Coimbatore Metro",
+      "corridor": "Avinashi Road & Trichy Highway",
+      "active_vehicles": 185,
+      "congestion_level": "Fluid",
+      "weather": "26\u00b0C \u00b7 Overcast"
+    },
+    {
+      "id": "LOC-MDU",
+      "city": "Madurai",
+      "district": "Madurai Heritage",
+      "corridor": "Ring Road Arterial",
+      "active_vehicles": 130,
+      "congestion_level": "Normal",
+      "weather": "33\u00b0C \u00b7 Sunny"
+    },
+    {
+      "id": "LOC-GIFT",
+      "city": "Gandhinagar / Ahmedabad",
+      "district": "GIFT City Special Zone",
+      "corridor": "Koba Circle to FinTech Hub",
+      "active_vehicles": 96,
+      "congestion_level": "Free Flow",
+      "weather": "30\u00b0C \u00b7 Dry"
+    }
+  ]
+}

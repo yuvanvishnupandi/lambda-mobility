@@ -1,0 +1,72 @@
+{
+  "collection": "urban_sensor_telemetry",
+  "stats": {
+    "collection": "urban_sensor_telemetry",
+    "total_documents": 5,
+    "indexed_sensors": 5,
+    "total_vehicles_logged": 689,
+    "average_density_per_event": 137.8
+  },
+  "documents": [
+    {
+      "sensor_id": "IOT-CAM-GST-1",
+      "corridor": "GST Road (NH 45) - Potheri Central Interchange",
+      "total_vehicles": 185,
+      "speed_avg_kmh": 38,
+      "coordinates": [
+        12.8231,
+        80.0444
+      ],
+      "_id": "doc_1791905240440_0",
+      "created_at_iso": "2026-10-13T15:27:20Z"
+    },
+    {
+      "sensor_id": "IOT-CAM-GDV-2",
+      "corridor": "GST Road (NH 45) - Guduvanchery",
+      "total_vehicles": 114,
+      "speed_avg_kmh": 42,
+      "coordinates": [
+        12.8465,
+        80.061
+      ],
+      "_id": "doc_1791905240440_1",
+      "created_at_iso": "2026-10-13T15:27:20Z"
+    },
+    {
+      "sensor_id": "IOT-CAM-MMN-3",
+      "corridor": "GST Road (NH 45) - Maraimalai Nagar",
+      "total_vehicles": 53,
+      "speed_avg_kmh": 50,
+      "coordinates": [
+        12.798,
+        80.024
+      ],
+      "_id": "doc_1791905240440_2",
+      "created_at_iso": "2026-10-13T15:27:20Z"
+    },
+    {
+      "sensor_id": "IOT-CAM-SPK-4",
+      "corridor": "GST Road (NH 45) - Singaperumal Koil",
+      "total_vehicles": 143,
+      "speed_avg_kmh": 35,
+      "coordinates": [
+        12.763,
+        79.998
+      ],
+      "_id": "doc_1791905240440_3",
+      "created_at_iso": "2026-10-13T15:27:20Z"
+    },
+    {
+      "sensor_id": "IOT-CAM-CGL-5",
+      "corridor": "GST Road (NH 45) - Chengalpattu Toll",
+      "total_vehicles": 194,
+      "speed_avg_kmh": 28,
+      "coordinates": [
+        12.723,
+        79.991
+      ],
+      "_id": "doc_1791905240440_4",
+      "created_at_iso": "2026-10-13T15:27:20Z"
+    }
+  ]
+}

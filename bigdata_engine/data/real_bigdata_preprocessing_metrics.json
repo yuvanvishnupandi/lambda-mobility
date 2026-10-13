@@ -1,0 +1,58 @@
+{
+  "status": "COMPLETED",
+  "total_datasets_processed": 3,
+  "flood_prediction_dataset": {
+    "name": "Kaggle Flood Prediction Benchmark (s4e5)",
+    "total_raw_rows": 1117957,
+    "sample_processed": 50000,
+    "features_count": 20,
+    "features": [
+      "MonsoonIntensity",
+      "TopographyDrainage",
+      "RiverManagement",
+      "Deforestation",
+      "Urbanization",
+      "ClimateChange",
+      "DamsQuality",
+      "Siltation",
+      "AgriculturalPractices",
+      "Encroachments",
+      "IneffectiveDisasterPreparedness",
+      "DrainageSystems",
+      "CoastalVulnerability",
+      "Landslides",
+      "Watersheds",
+      "DeterioratingInfrastructure",
+      "PopulationScore",
+      "WetlandLoss",
+      "InadequatePlanning",
+      "PoliticalFactors"
+    ],
+    "outliers_flagged": 591,
+    "train_partition_80pct": 40000,
+    "test_partition_20pct": 10000,
+    "distribution": {
+      "Low": 6276,
+      "Moderate": 33770,
+      "High": 9801,
+      "Critical": 153
+    },
+    "output_file": "C:\\Users\\yuvan\\OneDrive\\Documents\\lambda\\Lambda\\bigdata_engine\\data\\flood_prediction_cleaned_sample.csv"
+  },
+  "tamil_nadu_weather_dataset": {
+    "name": "Tamil Nadu 38-District Meteorological Ingestion",
+    "total_raw_rows": 1800000,
+    "sample_processed": 50000,
+    "districts_covered_count": 36,
+    "features": [
+      "Temperature_C",
+      "Relative_Humidity_Pct",
+      "Precipitation_mm",
+      "Surface_Pressure_hPa",
+      "Wind_Speed_kmh"
+    ],
+    "target": "Rain_Tomorrow_Label",
+    "rain_days_pct": 33.17,
+    "output_file": "C:\\Users\\yuvan\\OneDrive\\Documents\\lambda\\Lambda\\bigdata_engine\\data\\tn_weather_cleaned_sample.csv"
+  }
+}

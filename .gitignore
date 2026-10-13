@@ -1,0 +1,120 @@
+# ==============================================================================
+# DEPENDENCIES (Render & Vercel will install them fresh during build)
+# ==============================================================================
+node_modules/
+**/node_modules/
+frontend/node_modules/
+/.pnp
+.pnp.js
+venv/
+.venv/
+env/
+ENV/
+
+# ==============================================================================
+# PRODUCTION BUILD ARTIFACTS (Vercel builds on deploy)
+# ==============================================================================
+/build
+/dist
+**/dist/
+frontend/dist/
+/coverage
+.pytest_cache/
+
+# ==============================================================================
+# PYTHON COMPILATION & RUNTIME
+# ==============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ==============================================================================
+# SECRETS & ENVIRONMENT VARIABLES (Must configure in Vercel & Render Dashboards)
+# ==============================================================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+.env*
+!.env.example
+!backend/.env.example
+
+# ==============================================================================
+# USER REQUESTED EXCLUSIONS (ProofRules, generator scripts, project status)
+# ==============================================================================
+ProofRules/
+ProofsRules/
+*ProofRules*
+*ProofsRules*
+PROJECT_COMPLETE.md
+generate_word_doc.py
+Lambda_Full_System_Documentation.docx
+*.docx
+
+# ==============================================================================
+# LOCAL DATABASES & CACHES (Fresh DB created on backend)
+# ==============================================================================
+*.sqlite3
+*.db
+db.sqlite3
+backend/db.sqlite3
+bigdata_engine/storage/hive_metastore.db
+
+# ==============================================================================
+# BIG DATA DATASETS (>100MB exceeds GitHub hard limit of 100MB)
+# ==============================================================================
+bigdata_engine/data/*.csv
+bigdata_engine/data/*.xls
+bigdata_engine/data/*.xlsx
+bigdata_engine/storage/hdfs_storage/
+*.csv.xls
+
+# ==============================================================================
+# MACHINE LEARNING BINARY WEIGHTS (Re-trained on pipeline or cloud)
+# ==============================================================================
+bigdata_engine/models/*.pkl
+*.pkl
+
+# ==============================================================================
+# OS & SYSTEM ARTIFACTS
+# ==============================================================================
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# ==============================================================================
+# IDES & CLOUD CLI CACHES
+# ==============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vercel
+.wrangler/
+.freebuff/
+
+
