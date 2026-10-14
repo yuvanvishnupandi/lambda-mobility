@@ -3,38 +3,52 @@ updates:
   # Maintain dependencies for npm packages in frontend
   - package-ecosystem: "npm"
     directory: "/frontend"
+    target-branch: "main"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "frontend"
     commit-message:
-      prefix: "chore(deps-frontend)"
+      prefix: "build(deps-frontend)"
       include: "scope"
 
   # Maintain root npm packages
   - package-ecosystem: "npm"
     directory: "/"
+    target-branch: "main"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
     commit-message:
-      prefix: "chore(deps-root)"
+      prefix: "build(deps-root)"
       include: "scope"
 
   # Maintain Python dependencies for Big Data Engine
   - package-ecosystem: "pip"
     directory: "/"
+    target-branch: "main"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
     commit-message:
-      prefix: "chore(deps-python)"
+      prefix: "build(deps-python)"
       include: "scope"
 
   # Maintain GitHub Actions workflows
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: "main"
     schedule:
       interval: "monthly"
+    labels:
+      - "ci"
     commit-message:
       prefix: "ci(actions)"
       include: "scope"
